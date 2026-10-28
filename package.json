@@ -1,0 +1,25 @@
+{
+  "name": "revx-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "RevX — AI-Powered Smart-Driving Assistant for Smarter, Greener Driving",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run --workspace=apps/api dev",
+    "dev:web": "npm run --workspace=apps/web dev",
+    "dev:mobile": "npm run --workspace=apps/mobile start",
+    "build": "npm run --workspace=packages/shared build && npm run --workspace=packages/analytics build && npm run --workspace=apps/api build && npm run --workspace=apps/web build",
+    "test": "npm run --workspace=packages/shared test && npm run --workspace=apps/api test",
+    "test:sim": "ts-node simulators/run_simulation_cli.ts",
+    "seed": "npm run --workspace=apps/api seed",
+    "package": "node scripts/package_project.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}

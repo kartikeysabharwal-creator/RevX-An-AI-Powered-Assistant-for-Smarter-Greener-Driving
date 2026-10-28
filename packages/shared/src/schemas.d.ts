@@ -1,0 +1,392 @@
+import { z } from 'zod';
+export declare const FuelTypeSchema: z.ZodEnum<["PETROL", "DIESEL", "HYBRID", "ELECTRIC", "CNG"]>;
+export declare const OperatingModeSchema: z.ZodEnum<["PHONE_ONLY", "OBD_II"]>;
+export declare const DrivingEventTypeSchema: z.ZodEnum<["HARSH_ACCELERATION", "HARSH_BRAKING", "RAPID_SPEED_CHANGE", "SHARP_TURN", "EXCESSIVE_IDLE", "OVERSPEED"]>;
+export declare const RegisterUserSchema: z.ZodObject<{
+    email: z.ZodString;
+    password: z.ZodString;
+    fullName: z.ZodString;
+    preferredUnits: z.ZodDefault<z.ZodEnum<["METRIC", "IMPERIAL"]>>;
+    fuelPricePerLitre: z.ZodDefault<z.ZodNumber>;
+    personalBaselineEfficiency: z.ZodDefault<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    email: string;
+    fullName: string;
+    preferredUnits: "METRIC" | "IMPERIAL";
+    fuelPricePerLitre: number;
+    personalBaselineEfficiency: number;
+    password: string;
+}, {
+    email: string;
+    fullName: string;
+    password: string;
+    preferredUnits?: "METRIC" | "IMPERIAL" | undefined;
+    fuelPricePerLitre?: number | undefined;
+    personalBaselineEfficiency?: number | undefined;
+}>;
+export declare const LoginUserSchema: z.ZodObject<{
+    email: z.ZodString;
+    password: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    email: string;
+    password: string;
+}, {
+    email: string;
+    password: string;
+}>;
+export declare const UpdateProfileSchema: z.ZodObject<{
+    fullName: z.ZodOptional<z.ZodString>;
+    preferredUnits: z.ZodOptional<z.ZodEnum<["METRIC", "IMPERIAL"]>>;
+    currencySymbol: z.ZodOptional<z.ZodString>;
+    fuelPricePerLitre: z.ZodOptional<z.ZodNumber>;
+    personalBaselineEfficiency: z.ZodOptional<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    fullName?: string | undefined;
+    preferredUnits?: "METRIC" | "IMPERIAL" | undefined;
+    currencySymbol?: string | undefined;
+    fuelPricePerLitre?: number | undefined;
+    personalBaselineEfficiency?: number | undefined;
+}, {
+    fullName?: string | undefined;
+    preferredUnits?: "METRIC" | "IMPERIAL" | undefined;
+    currencySymbol?: string | undefined;
+    fuelPricePerLitre?: number | undefined;
+    personalBaselineEfficiency?: number | undefined;
+}>;
+export declare const CreateVehicleSchema: z.ZodObject<{
+    make: z.ZodString;
+    model: z.ZodString;
+    year: z.ZodNumber;
+    fuelType: z.ZodEnum<["PETROL", "DIESEL", "HYBRID", "ELECTRIC", "CNG"]>;
+    engineSizeL: z.ZodDefault<z.ZodNumber>;
+    transmission: z.ZodDefault<z.ZodEnum<["AUTOMATIC", "MANUAL"]>>;
+    fuelTankCapacityL: z.ZodDefault<z.ZodNumber>;
+    odometerKm: z.ZodDefault<z.ZodNumber>;
+    nickname: z.ZodOptional<z.ZodString>;
+    isPrimary: z.ZodDefault<z.ZodBoolean>;
+}, "strip", z.ZodTypeAny, {
+    model: string;
+    make: string;
+    year: number;
+    fuelType: "PETROL" | "DIESEL" | "HYBRID" | "ELECTRIC" | "CNG";
+    engineSizeL: number;
+    transmission: "AUTOMATIC" | "MANUAL";
+    fuelTankCapacityL: number;
+    odometerKm: number;
+    isPrimary: boolean;
+    nickname?: string | undefined;
+}, {
+    model: string;
+    make: string;
+    year: number;
+    fuelType: "PETROL" | "DIESEL" | "HYBRID" | "ELECTRIC" | "CNG";
+    engineSizeL?: number | undefined;
+    transmission?: "AUTOMATIC" | "MANUAL" | undefined;
+    fuelTankCapacityL?: number | undefined;
+    odometerKm?: number | undefined;
+    nickname?: string | undefined;
+    isPrimary?: boolean | undefined;
+}>;
+export declare const UpdateVehicleSchema: z.ZodObject<{
+    make: z.ZodOptional<z.ZodString>;
+    model: z.ZodOptional<z.ZodString>;
+    year: z.ZodOptional<z.ZodNumber>;
+    fuelType: z.ZodOptional<z.ZodEnum<["PETROL", "DIESEL", "HYBRID", "ELECTRIC", "CNG"]>>;
+    engineSizeL: z.ZodOptional<z.ZodDefault<z.ZodNumber>>;
+    transmission: z.ZodOptional<z.ZodDefault<z.ZodEnum<["AUTOMATIC", "MANUAL"]>>>;
+    fuelTankCapacityL: z.ZodOptional<z.ZodDefault<z.ZodNumber>>;
+    odometerKm: z.ZodOptional<z.ZodDefault<z.ZodNumber>>;
+    nickname: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+    isPrimary: z.ZodOptional<z.ZodDefault<z.ZodBoolean>>;
+}, "strip", z.ZodTypeAny, {
+    model?: string | undefined;
+    make?: string | undefined;
+    year?: number | undefined;
+    fuelType?: "PETROL" | "DIESEL" | "HYBRID" | "ELECTRIC" | "CNG" | undefined;
+    engineSizeL?: number | undefined;
+    transmission?: "AUTOMATIC" | "MANUAL" | undefined;
+    fuelTankCapacityL?: number | undefined;
+    odometerKm?: number | undefined;
+    nickname?: string | undefined;
+    isPrimary?: boolean | undefined;
+}, {
+    model?: string | undefined;
+    make?: string | undefined;
+    year?: number | undefined;
+    fuelType?: "PETROL" | "DIESEL" | "HYBRID" | "ELECTRIC" | "CNG" | undefined;
+    engineSizeL?: number | undefined;
+    transmission?: "AUTOMATIC" | "MANUAL" | undefined;
+    fuelTankCapacityL?: number | undefined;
+    odometerKm?: number | undefined;
+    nickname?: string | undefined;
+    isPrimary?: boolean | undefined;
+}>;
+export declare const TelemetryPointSchema: z.ZodObject<{
+    timestamp: z.ZodNumber;
+    latitude: z.ZodNumber;
+    longitude: z.ZodNumber;
+    accuracy: z.ZodDefault<z.ZodNumber>;
+    speedKmh: z.ZodNumber;
+    altitude: z.ZodOptional<z.ZodNumber>;
+    heading: z.ZodOptional<z.ZodNumber>;
+    rawAx: z.ZodOptional<z.ZodNumber>;
+    rawAy: z.ZodOptional<z.ZodNumber>;
+    rawAz: z.ZodOptional<z.ZodNumber>;
+    longitudinalAccelMs2: z.ZodNumber;
+    lateralAccelMs2: z.ZodDefault<z.ZodNumber>;
+    verticalAccelMs2: z.ZodDefault<z.ZodNumber>;
+    gyroZ: z.ZodOptional<z.ZodNumber>;
+    jerkMs3: z.ZodOptional<z.ZodNumber>;
+    rpm: z.ZodOptional<z.ZodNumber>;
+    throttlePos: z.ZodOptional<z.ZodNumber>;
+    engineLoad: z.ZodOptional<z.ZodNumber>;
+    coolantTempC: z.ZodOptional<z.ZodNumber>;
+    fuelLevelPercent: z.ZodOptional<z.ZodNumber>;
+    batteryVoltage: z.ZodOptional<z.ZodNumber>;
+    mafGramsSec: z.ZodOptional<z.ZodNumber>;
+    sourceMode: z.ZodDefault<z.ZodEnum<["PHONE_ONLY", "OBD_II"]>>;
+    isStationary: z.ZodDefault<z.ZodBoolean>;
+}, "strip", z.ZodTypeAny, {
+    isStationary: boolean;
+    timestamp: number;
+    latitude: number;
+    longitude: number;
+    accuracy: number;
+    speedKmh: number;
+    longitudinalAccelMs2: number;
+    lateralAccelMs2: number;
+    verticalAccelMs2: number;
+    sourceMode: "PHONE_ONLY" | "OBD_II";
+    altitude?: number | undefined;
+    heading?: number | undefined;
+    rawAx?: number | undefined;
+    rawAy?: number | undefined;
+    rawAz?: number | undefined;
+    gyroZ?: number | undefined;
+    jerkMs3?: number | undefined;
+    rpm?: number | undefined;
+    throttlePos?: number | undefined;
+    engineLoad?: number | undefined;
+    coolantTempC?: number | undefined;
+    fuelLevelPercent?: number | undefined;
+    batteryVoltage?: number | undefined;
+    mafGramsSec?: number | undefined;
+}, {
+    timestamp: number;
+    latitude: number;
+    longitude: number;
+    speedKmh: number;
+    longitudinalAccelMs2: number;
+    isStationary?: boolean | undefined;
+    accuracy?: number | undefined;
+    altitude?: number | undefined;
+    heading?: number | undefined;
+    rawAx?: number | undefined;
+    rawAy?: number | undefined;
+    rawAz?: number | undefined;
+    lateralAccelMs2?: number | undefined;
+    verticalAccelMs2?: number | undefined;
+    gyroZ?: number | undefined;
+    jerkMs3?: number | undefined;
+    rpm?: number | undefined;
+    throttlePos?: number | undefined;
+    engineLoad?: number | undefined;
+    coolantTempC?: number | undefined;
+    fuelLevelPercent?: number | undefined;
+    batteryVoltage?: number | undefined;
+    mafGramsSec?: number | undefined;
+    sourceMode?: "PHONE_ONLY" | "OBD_II" | undefined;
+}>;
+export declare const StartTripSchema: z.ZodObject<{
+    vehicleId: z.ZodString;
+    mode: z.ZodEnum<["PHONE_ONLY", "OBD_II"]>;
+    initialLatitude: z.ZodOptional<z.ZodNumber>;
+    initialLongitude: z.ZodOptional<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    vehicleId: string;
+    mode: "PHONE_ONLY" | "OBD_II";
+    initialLatitude?: number | undefined;
+    initialLongitude?: number | undefined;
+}, {
+    vehicleId: string;
+    mode: "PHONE_ONLY" | "OBD_II";
+    initialLatitude?: number | undefined;
+    initialLongitude?: number | undefined;
+}>;
+export declare const IngestTelemetrySchema: z.ZodObject<{
+    tripId: z.ZodString;
+    points: z.ZodArray<z.ZodObject<{
+        timestamp: z.ZodNumber;
+        latitude: z.ZodNumber;
+        longitude: z.ZodNumber;
+        accuracy: z.ZodDefault<z.ZodNumber>;
+        speedKmh: z.ZodNumber;
+        altitude: z.ZodOptional<z.ZodNumber>;
+        heading: z.ZodOptional<z.ZodNumber>;
+        rawAx: z.ZodOptional<z.ZodNumber>;
+        rawAy: z.ZodOptional<z.ZodNumber>;
+        rawAz: z.ZodOptional<z.ZodNumber>;
+        longitudinalAccelMs2: z.ZodNumber;
+        lateralAccelMs2: z.ZodDefault<z.ZodNumber>;
+        verticalAccelMs2: z.ZodDefault<z.ZodNumber>;
+        gyroZ: z.ZodOptional<z.ZodNumber>;
+        jerkMs3: z.ZodOptional<z.ZodNumber>;
+        rpm: z.ZodOptional<z.ZodNumber>;
+        throttlePos: z.ZodOptional<z.ZodNumber>;
+        engineLoad: z.ZodOptional<z.ZodNumber>;
+        coolantTempC: z.ZodOptional<z.ZodNumber>;
+        fuelLevelPercent: z.ZodOptional<z.ZodNumber>;
+        batteryVoltage: z.ZodOptional<z.ZodNumber>;
+        mafGramsSec: z.ZodOptional<z.ZodNumber>;
+        sourceMode: z.ZodDefault<z.ZodEnum<["PHONE_ONLY", "OBD_II"]>>;
+        isStationary: z.ZodDefault<z.ZodBoolean>;
+    }, "strip", z.ZodTypeAny, {
+        isStationary: boolean;
+        timestamp: number;
+        latitude: number;
+        longitude: number;
+        accuracy: number;
+        speedKmh: number;
+        longitudinalAccelMs2: number;
+        lateralAccelMs2: number;
+        verticalAccelMs2: number;
+        sourceMode: "PHONE_ONLY" | "OBD_II";
+        altitude?: number | undefined;
+        heading?: number | undefined;
+        rawAx?: number | undefined;
+        rawAy?: number | undefined;
+        rawAz?: number | undefined;
+        gyroZ?: number | undefined;
+        jerkMs3?: number | undefined;
+        rpm?: number | undefined;
+        throttlePos?: number | undefined;
+        engineLoad?: number | undefined;
+        coolantTempC?: number | undefined;
+        fuelLevelPercent?: number | undefined;
+        batteryVoltage?: number | undefined;
+        mafGramsSec?: number | undefined;
+    }, {
+        timestamp: number;
+        latitude: number;
+        longitude: number;
+        speedKmh: number;
+        longitudinalAccelMs2: number;
+        isStationary?: boolean | undefined;
+        accuracy?: number | undefined;
+        altitude?: number | undefined;
+        heading?: number | undefined;
+        rawAx?: number | undefined;
+        rawAy?: number | undefined;
+        rawAz?: number | undefined;
+        lateralAccelMs2?: number | undefined;
+        verticalAccelMs2?: number | undefined;
+        gyroZ?: number | undefined;
+        jerkMs3?: number | undefined;
+        rpm?: number | undefined;
+        throttlePos?: number | undefined;
+        engineLoad?: number | undefined;
+        coolantTempC?: number | undefined;
+        fuelLevelPercent?: number | undefined;
+        batteryVoltage?: number | undefined;
+        mafGramsSec?: number | undefined;
+        sourceMode?: "PHONE_ONLY" | "OBD_II" | undefined;
+    }>, "many">;
+    isEnd: z.ZodDefault<z.ZodBoolean>;
+}, "strip", z.ZodTypeAny, {
+    tripId: string;
+    points: {
+        isStationary: boolean;
+        timestamp: number;
+        latitude: number;
+        longitude: number;
+        accuracy: number;
+        speedKmh: number;
+        longitudinalAccelMs2: number;
+        lateralAccelMs2: number;
+        verticalAccelMs2: number;
+        sourceMode: "PHONE_ONLY" | "OBD_II";
+        altitude?: number | undefined;
+        heading?: number | undefined;
+        rawAx?: number | undefined;
+        rawAy?: number | undefined;
+        rawAz?: number | undefined;
+        gyroZ?: number | undefined;
+        jerkMs3?: number | undefined;
+        rpm?: number | undefined;
+        throttlePos?: number | undefined;
+        engineLoad?: number | undefined;
+        coolantTempC?: number | undefined;
+        fuelLevelPercent?: number | undefined;
+        batteryVoltage?: number | undefined;
+        mafGramsSec?: number | undefined;
+    }[];
+    isEnd: boolean;
+}, {
+    tripId: string;
+    points: {
+        timestamp: number;
+        latitude: number;
+        longitude: number;
+        speedKmh: number;
+        longitudinalAccelMs2: number;
+        isStationary?: boolean | undefined;
+        accuracy?: number | undefined;
+        altitude?: number | undefined;
+        heading?: number | undefined;
+        rawAx?: number | undefined;
+        rawAy?: number | undefined;
+        rawAz?: number | undefined;
+        lateralAccelMs2?: number | undefined;
+        verticalAccelMs2?: number | undefined;
+        gyroZ?: number | undefined;
+        jerkMs3?: number | undefined;
+        rpm?: number | undefined;
+        throttlePos?: number | undefined;
+        engineLoad?: number | undefined;
+        coolantTempC?: number | undefined;
+        fuelLevelPercent?: number | undefined;
+        batteryVoltage?: number | undefined;
+        mafGramsSec?: number | undefined;
+        sourceMode?: "PHONE_ONLY" | "OBD_II" | undefined;
+    }[];
+    isEnd?: boolean | undefined;
+}>;
+export declare const EndTripSchema: z.ZodObject<{
+    tripId: z.ZodString;
+    finalOdometer: z.ZodOptional<z.ZodNumber>;
+    forceRecalculate: z.ZodDefault<z.ZodBoolean>;
+}, "strip", z.ZodTypeAny, {
+    tripId: string;
+    forceRecalculate: boolean;
+    finalOdometer?: number | undefined;
+}, {
+    tripId: string;
+    finalOdometer?: number | undefined;
+    forceRecalculate?: boolean | undefined;
+}>;
+export declare const AnalyzeTripRequestSchema: z.ZodObject<{
+    tripId: z.ZodString;
+    forceRefresh: z.ZodDefault<z.ZodBoolean>;
+}, "strip", z.ZodTypeAny, {
+    tripId: string;
+    forceRefresh: boolean;
+}, {
+    tripId: string;
+    forceRefresh?: boolean | undefined;
+}>;
+export declare const TripFilterSchema: z.ZodObject<{
+    period: z.ZodDefault<z.ZodEnum<["TODAY", "YESTERDAY", "WEEK", "MONTH", "3MONTHS", "ALL"]>>;
+    vehicleId: z.ZodOptional<z.ZodString>;
+    page: z.ZodDefault<z.ZodNumber>;
+    limit: z.ZodDefault<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    period: "TODAY" | "YESTERDAY" | "WEEK" | "MONTH" | "3MONTHS" | "ALL";
+    page: number;
+    limit: number;
+    vehicleId?: string | undefined;
+}, {
+    vehicleId?: string | undefined;
+    period?: "TODAY" | "YESTERDAY" | "WEEK" | "MONTH" | "3MONTHS" | "ALL" | undefined;
+    page?: number | undefined;
+    limit?: number | undefined;
+}>;
