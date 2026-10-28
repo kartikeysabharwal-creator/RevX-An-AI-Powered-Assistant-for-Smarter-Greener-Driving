@@ -1,0 +1,30 @@
+{
+  "model_name": "RevX-Fuel-Regression-Estimator",
+  "version": "v1.4.0",
+  "feature_order": [
+    "bias",
+    "avg_speed_kmh",
+    "speed_variance",
+    "harsh_accels",
+    "harsh_brakes",
+    "idle_ratio",
+    "engine_load_avg",
+    "rpm_thousands"
+  ],
+  "weights": [
+    4.774925,
+    0.009265,
+    0.011584,
+    0.463872,
+    0.133089,
+    -2.171982,
+    0.057244,
+    0.45672
+  ],
+  "metrics": {
+    "MAE": 0.3629,
+    "RMSE": 0.4627,
+    "R2": 0.9787,
+    "MAPE_percent": 3.7
+  }
+}

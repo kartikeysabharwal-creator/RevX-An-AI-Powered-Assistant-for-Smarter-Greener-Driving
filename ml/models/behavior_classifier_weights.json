@@ -1,0 +1,52 @@
+{
+  "model_name": "RevX-Driver-Behavior-Classifier",
+  "version": "v1.4.0",
+  "classes": [
+    "SLOW",
+    "NORMAL",
+    "AGGRESSIVE"
+  ],
+  "metrics": {
+    "accuracy": 0.915,
+    "macro_precision": 0.9291,
+    "macro_recall": 0.8959,
+    "macro_f1": 0.9076,
+    "confusion_matrix": {
+      "SLOW": {
+        "SLOW": 69,
+        "NORMAL": 26,
+        "AGGRESSIVE": 0
+      },
+      "NORMAL": {
+        "SLOW": 5,
+        "NORMAL": 199,
+        "AGGRESSIVE": 3
+      },
+      "AGGRESSIVE": {
+        "SLOW": 0,
+        "NORMAL": 0,
+        "AGGRESSIVE": 98
+      }
+    },
+    "per_class": {
+      "SLOW": {
+        "precision": 0.9324,
+        "recall": 0.7263,
+        "f1": 0.8166,
+        "support": 95
+      },
+      "NORMAL": {
+        "precision": 0.8844,
+        "recall": 0.9614,
+        "f1": 0.9213,
+        "support": 207
+      },
+      "AGGRESSIVE": {
+        "precision": 0.9703,
+        "recall": 1.0,
+        "f1": 0.9849,
+        "support": 98
+      }
+    }
+  }
+}
